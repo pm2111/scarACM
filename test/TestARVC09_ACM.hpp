@@ -10,7 +10,7 @@
 #include "RegularStimulus.hpp"
 #include "ORdGksVarierARVC018.hpp"
 #include "PostUpstrokeTimeAdaptivityControllerCL.hpp"
-#include "DijkstraARVC018_ToRORd.hpp"
+#include "Dijkstra_Cell_Factory_ACM_Endo.hpp"
 #include "PseudoEcgCalculator.hpp"
 #include "OutputFileHandler.hpp"
 #include "FileComparison.hpp"
@@ -432,7 +432,7 @@ oost::shared_ptr<SingleTraceOutputModifier> trace_modifier_LL(new SingleTraceOut
         bidomain_problem.SetWriteInfo();
 	
         bidomain_problem.SetUseHdf5DataWriterCache(true);
-	bidomain_problem.SetHdf5DataWriterTargetChunkSizeAndAlignment(1048576);
+//	bidomain_problem.SetHdf5DataWriterTargetChunkSizeAndAlignment(1048576);
         bidomain_problem.Initialise();
 	      // Get the tissue from the problem and apply the modifier
 	
