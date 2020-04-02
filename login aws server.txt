@@ -1,9 +1,0 @@
-ssh -L localhost:8888:localhost:8888 -i "C:\Users\peter\Dropbox\aws\private_AWS2.pem" ubuntu@ec2-63-34-182-123.eu-west-1.compute.amazonaws.com
-
-supermuc ng and huba na gitovete : Legesl4$
-
-
- scp di39wun2@skx.supermuc.lrz.de:~/.bashrc /data/DropPeter/Dropbox/Dphil/for\ aditi\ supermuc\ ng/
-
-
-/dss/dsshome1/05/di39wun2/Chaste2017/projects/template_chaste/test
