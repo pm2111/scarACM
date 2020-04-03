@@ -177,7 +177,7 @@ public:
 
 
         /* Simulation options */
-        HeartConfig::Instance()->SetSimulationDuration(1600); // ms
+        HeartConfig::Instance()->SetSimulationDuration(800); // ms
 	double period = 800.0;//stimulation period in ms, 
         HeartConfig::Instance()->SetOutputDirectory(output_dir);
         HeartConfig::Instance()->SetOutputFilenamePrefix("results");
