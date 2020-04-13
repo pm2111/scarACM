@@ -306,7 +306,7 @@ public:
 		std::cout << "i get to root nodes" <<std::endl;
     	std::vector<unsigned int> rootnodes;    // a vector to hold apexbase data
 	// open file    
-	std::ifstream inputFile(edge_nodes_path+"roots/start.txt");
+	std::ifstream inputFile(edge_nodes_path+"roots/calibrated.txt");
 
 	if (inputFile) {       
 	int value;
