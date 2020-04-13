@@ -431,7 +431,7 @@ oost::shared_ptr<SingleTraceOutputModifier> trace_modifier_LL(new SingleTraceOut
 	
         bidomain_problem.SetWriteInfo();
 	
-        bidomain_problem.SetUseHdf5DataWriterCache(true);
+        bidomain_problem.SetUseHdf5DataWriterCache(false);
 //	bidomain_problem.SetHdf5DataWriterTargetChunkSizeAndAlignment(1048576);
         bidomain_problem.Initialise();
 	      // Get the tissue from the problem and apply the modifier
