@@ -431,8 +431,8 @@ oost::shared_ptr<SingleTraceOutputModifier> trace_modifier_LL(new SingleTraceOut
 	
         bidomain_problem.SetWriteInfo();
 	
-        bidomain_problem.SetUseHdf5DataWriterCache(false);
-//	bidomain_problem.SetHdf5DataWriterTargetChunkSizeAndAlignment(1048576);
+        bidomain_problem.SetUseHdf5DataWriterCache(true);  //this speeds up computation by approximately 1hr for a 800ms sim on SUPERMUC NG
+		bidomain_problem.SetHdf5DataWriterTargetChunkSizeAndAlignment(1048576); 
         bidomain_problem.Initialise();
 	      // Get the tissue from the problem and apply the modifier
 	
