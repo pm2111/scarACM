@@ -472,7 +472,7 @@ oost::shared_ptr<SingleTraceOutputModifier> trace_modifier_LL(new SingleTraceOut
 	//delete p_bidomain_tissue; //free up memory
         std::cout <<"i start solving the problem" << std::endl;
 
-	bidomain_problem.Solve();
+	 bidomain_problem.Solve();
 
 	
 //	mesh.SetMeshHasChangedSinceLoading(); //need thhis so that mesh is saved in permuted form and not copied!!
