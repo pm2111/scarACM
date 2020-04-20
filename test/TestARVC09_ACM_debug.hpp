@@ -210,7 +210,7 @@ public:
 {
 	if ( rv_root_nodes[i]==1 )
 	{
-      	  rv_root_nodes[i]=rootnodes[i+nr_lv_roots]; // (5.577 9.896 6.501) LV anterior base
+      	  rv_root_nodes[i]=rootnodes[i+nr_lv_roots+1]; // (5.577 9.896 6.501) LV anterior base
 		  std::cout << "RV root " << rv_root_nodes[i] << std::endl;
 	}
 
