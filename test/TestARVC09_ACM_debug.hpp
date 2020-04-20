@@ -209,7 +209,7 @@ public:
 	inputFile1.close();
        // LV and RV activation root nodes
         std::vector<unsigned> lv_root_nodes;
-	for (int i =0; i<nr_lv_roots;i++)
+	for (int i =0; i<4;i++)
 {
 	if ( nodes_present[i]==1 )
 	{
@@ -224,7 +224,7 @@ public:
 }
 
         std::vector<unsigned> rv_root_nodes;
-	for (int i =nr_lv_roots; i<nr_rv_roots;i++)
+	for (int i =4; i<7;i++)
 {
 	if ( nodes_present[i]==1 )
 	{
