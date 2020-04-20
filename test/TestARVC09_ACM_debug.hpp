@@ -27,6 +27,9 @@ class TestSolveTorso : public CxxTest::TestSuite
 public:
     void TestSolve() throw(Exception)
     {
+       // LV and RV activation root nodes
+        std::vector<unsigned> lv_root_nodes;
+        std::vector<unsigned> rv_root_nodes;
 
 	//Commandline arguments
    	std::vector <unsigned> nodes_present;
@@ -36,7 +39,7 @@ public:
             char* val = CommandLineArguments::Instance()->GetValueCorrespondingToOption("--lv_basal_anterior_root");
             dummy = std::atoi(val);
 			
-	    nodes_present.push_back(dummy);
+	    lv_root_nodes.push_back(dummy);
         }
 	else
 	{
@@ -48,7 +51,7 @@ public:
         if (root1 == true) {
             char* val = CommandLineArguments::Instance()->GetValueCorrespondingToOption("--lv_apical_posterior_root");
             dummy = std::atoi(val);
-	    nodes_present.push_back(dummy);
+			lv_root_nodes.push_back(dummy);
         }
 	else
 	{
@@ -59,7 +62,7 @@ public:
         if (root2 == true) {
             char* val = CommandLineArguments::Instance()->GetValueCorrespondingToOption("--lv_mid_posterior_root");
             dummy = std::atoi(val);
-	    nodes_present.push_back(dummy);
+			lv_root_nodes.push_back(dummy);
         }
 	else
 	{
@@ -70,7 +73,7 @@ public:
         if (root3 == true) {
             char* val = CommandLineArguments::Instance()->GetValueCorrespondingToOption("--lv_septal_root");
             dummy = std::atoi(val);
-	    nodes_present.push_back(dummy);
+			lv_root_nodes.push_back(dummy);
         }
 	else
 	{
@@ -81,7 +84,7 @@ public:
         if (root4 == true) {
             char* val = CommandLineArguments::Instance()->GetValueCorrespondingToOption("--rv_mid_anterolateral_root");
             dummy = std::atoi(val);
-	    nodes_present.push_back(dummy);
+			rv_root_nodes.push_back(dummy);
         }
 	else
 	{
@@ -94,7 +97,7 @@ public:
         if (root5 == true) {
             char* val = CommandLineArguments::Instance()->GetValueCorrespondingToOption("--rv_basal_posterolateral_root");
             dummy = std::atoi(val);
-	    nodes_present.push_back(dummy);
+			rv_root_nodes.push_back(dummy);
         }
 	else
 	{
@@ -106,7 +109,7 @@ public:
         if (root6 == true) {
             char* val = CommandLineArguments::Instance()->GetValueCorrespondingToOption("--rv_septal_root");
             dummy = std::atoi(val);
-	    nodes_present.push_back(dummy);
+			rv_root_nodes.push_back(dummy);
         }
 	else
 	{
@@ -180,7 +183,6 @@ public:
 
 	/* Root node specification*/
 		std::cout << "i get to root nodes" <<std::endl;
-    	std::vector<unsigned int> rootnodes;    // a vector to hold apexbase data
 	// open file    
 	std::ifstream inputFile(edge_nodes_path+"roots/calibrated.txt");
 
@@ -193,7 +195,6 @@ public:
 	rootnodes.push_back(value2);
 	}
 	}
-  	std::vector<unsigned int> rootnodes_permuted;    // a vector to hold apexbase data
 	// open file    
 	std::ifstream inputFile1(edge_nodes_path+"roots/permuted.txt");
 	inputFile.close();
@@ -208,7 +209,6 @@ public:
 	}
 	inputFile1.close();
        // LV and RV activation root nodes
-        std::vector<unsigned> lv_root_nodes;
 	for (int i =0; i<4;i++)
 {
 	if ( nodes_present[i]==1 )
@@ -223,7 +223,6 @@ public:
 	
 }
 
-        std::vector<unsigned> rv_root_nodes;
 	for (int i =4; i<7;i++)
 {
 	if ( nodes_present[i]==1 )
