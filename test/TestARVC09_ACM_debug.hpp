@@ -89,7 +89,7 @@ public:
 	else
 	{
 	  std::cout << "rv_mid_anterolateral_root not specified in commandline args, will place it anyways" <<std::endl;
-	  nodes_present.push_back(1);
+	  rv_root_nodes.push_back(1);
 
 	}
 
@@ -185,55 +185,34 @@ public:
 		std::cout << "i get to root nodes" <<std::endl;
 	// open file    
 	std::ifstream inputFile(edge_nodes_path+"roots/calibrated.txt");
-
+	std::vector <double> rootnodes;
 	if (inputFile) {       
 	int value;
 	
 	// read the elements in the file into a vector  
 	while ( inputFile >> value ) {
             unsigned int value2 = value;
-	rootnodes.push_back(value2);
+			rootnodes.push_back(value2);
 	}
 	}
-	// open file    
-	std::ifstream inputFile1(edge_nodes_path+"roots/permuted.txt");
-	inputFile.close();
-	if (inputFile1) {       
-	int value;
 	
-	// read the elements in the file into a vector  
-	while ( inputFile1 >> value ) {
-            unsigned int value2 = value;
-	rootnodes_permuted.push_back(value2);
-	}
-	}
-	inputFile1.close();
        // LV and RV activation root nodes
 	for (int i =0; i<4;i++)
 {
-	if ( nodes_present[i]==1 )
+	if ( lv_root_nodes[i]==1 )
 	{
       	  lv_root_nodes.push_back(rootnodes[i]); // (5.577 9.896 6.501) LV anterior base
 		  std::cout << "LV root " << lv_root_nodes[i] << std::endl;
 	}
-	  if( nodes_present[i] ==2)
-	{
-		 lv_root_nodes.push_back(rootnodes_permuted[i]); // (5.577 9.896 6.501) LV anterior base
-	}  
-	
 }
 
-	for (int i =4; i<7;i++)
+	for (int i =0; i<3;i++)
 {
-	if ( nodes_present[i]==1 )
+	if ( rv_root_nodes[i]==1 )
 	{
-      	  rv_root_nodes.push_back(rootnodes[i]); // (5.577 9.896 6.501) LV anterior base
+      	  rv_root_nodes.push_back(rootnodes[i+nr_lv_roots]); // (5.577 9.896 6.501) LV anterior base
 		  std::cout << "RV root " << rv_root_nodes[i] << std::endl;
 	}
-	  if( nodes_present[i] ==2)
-	{
-		 rv_root_nodes.push_back(rootnodes_permuted[i]); // (5.577 9.896 6.501) LV anterior base
-	}  
 
 }
 	
