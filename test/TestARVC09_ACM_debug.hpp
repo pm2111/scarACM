@@ -16,11 +16,11 @@
 #include "FileComparison.hpp"
 #include "HeartConfig.hpp"
 #include <Hdf5DataWriter.hpp>
-
 #include "ConductivitiesModifierAnnulusIndexed3DExperimentalFibrosisSodium.hpp"
+
 #include <algorithm> //for search of root node vec
 #include <string>     // std::string, std::stoi
-
+#include <iostream> //for vector iterations
 class TestSolveTorso : public CxxTest::TestSuite
 {
 
@@ -38,13 +38,14 @@ public:
         if (root0 == true) {
             char* val = CommandLineArguments::Instance()->GetValueCorrespondingToOption("--lv_basal_anterior_root");
             dummy = std::atoi(val);
-			
+	        std::cout << "lv_basal_anterior_root" << dummy <<std::endl;
+
 	    lv_root_nodes.push_back(dummy);
         }
 	else
 	{
 	  std::cout << "lv_basal_anterior_root not specified in commandline args" <<std::endl;
-	  exit(1);
+	    lv_root_nodes.push_back(0);
 	}
 
         bool root1 = CommandLineArguments::Instance()->OptionExists("--lv_apical_posterior_root");
@@ -52,44 +53,52 @@ public:
             char* val = CommandLineArguments::Instance()->GetValueCorrespondingToOption("--lv_apical_posterior_root");
             dummy = std::atoi(val);
 			lv_root_nodes.push_back(dummy);
+	        std::cout << "lv_apical_posterior_root" << dummy <<std::endl;
+
         }
 	else
 	{
 	  std::cout << "lv_apical_posterior_root not specified in commandline args" <<std::endl;
-	  exit(1);
+	    lv_root_nodes.push_back(0);
 	}
         bool root2 = CommandLineArguments::Instance()->OptionExists("--lv_mid_posterior_root");
         if (root2 == true) {
             char* val = CommandLineArguments::Instance()->GetValueCorrespondingToOption("--lv_mid_posterior_root");
             dummy = std::atoi(val);
 			lv_root_nodes.push_back(dummy);
+	        std::cout << "lv_mid_posterior_root" << dummy <<std::endl;
+
         }
 	else
 	{
 	  std::cout << "lv_mid_posterior_root not specified in commandline args" <<std::endl;
-	  exit(1);
+	    lv_root_nodes.push_back(0);
 	}
         bool root3 = CommandLineArguments::Instance()->OptionExists("--lv_septal_root");
         if (root3 == true) {
             char* val = CommandLineArguments::Instance()->GetValueCorrespondingToOption("--lv_septal_root");
             dummy = std::atoi(val);
 			lv_root_nodes.push_back(dummy);
+	        std::cout << "lv_septal_root" << dummy <<std::endl;
+
         }
 	else
 	{
 	  std::cout << "lv_septal_root not specified in commandline args" <<std::endl;
-	  exit(1);
+	    lv_root_nodes.push_back(0);
 	}
         bool root4 = CommandLineArguments::Instance()->OptionExists("--rv_mid_anterolateral_root");
         if (root4 == true) {
             char* val = CommandLineArguments::Instance()->GetValueCorrespondingToOption("--rv_mid_anterolateral_root");
             dummy = std::atoi(val);
 			rv_root_nodes.push_back(dummy);
+	        std::cout << "rv_mid_anterolateral_root" << dummy <<std::endl;
+
         }
 	else
 	{
 	  std::cout << "rv_mid_anterolateral_root not specified in commandline args, will place it anyways" <<std::endl;
-	  rv_root_nodes.push_back(1);
+	  rv_root_nodes.push_back(0);
 
 	}
 
@@ -98,11 +107,13 @@ public:
             char* val = CommandLineArguments::Instance()->GetValueCorrespondingToOption("--rv_basal_posterolateral_root");
             dummy = std::atoi(val);
 			rv_root_nodes.push_back(dummy);
+	        std::cout << "rv_basal_posterolateral_root" << dummy <<std::endl;
+
         }
 	else
 	{
 	  std::cout << "rv_basal_posterolateral_root not specified in commandline args" <<std::endl;
-	  exit(1);
+	  rv_root_nodes.push_back(0);
 	}
 
         bool root6 = CommandLineArguments::Instance()->OptionExists("--rv_septal_root");
@@ -110,11 +121,13 @@ public:
             char* val = CommandLineArguments::Instance()->GetValueCorrespondingToOption("--rv_septal_root");
             dummy = std::atoi(val);
 			rv_root_nodes.push_back(dummy);
+	        std::cout << "rv_septal_root" << dummy <<std::endl;
+
         }
 	else
 	{
 	  std::cout << "rv_septal_root not specified in commandline args" <<std::endl;
-	  exit(1);
+	  rv_root_nodes.push_back(0);
 	}
 
        bool reg = CommandLineArguments::Instance()->OptionExists("--regions_file");
@@ -127,7 +140,7 @@ public:
 	else
 	{
 	  std::cout << "regions_file not specified in commandline args" <<std::endl;
-	  exit(1);
+	  rv_root_nodes.push_back(0);
 	}
 	bool dummy_lv_root_nr = CommandLineArguments::Instance()->OptionExists("--nr_lv_roots");
 	int nr_lv_roots;
@@ -185,7 +198,7 @@ public:
 		std::cout << "i get to root nodes" <<std::endl;
 	// open file    
 	std::ifstream inputFile(edge_nodes_path+"roots/calibrated.txt");
-	std::vector <double> rootnodes;
+	std::vector <int> rootnodes;
 	if (inputFile) {       
 	int value;
 	
@@ -197,20 +210,33 @@ public:
 	}
 	
        // LV and RV activation root nodes
-	for (int i =0; i<4;i++)
+	   int i=0;
+
+	  
+	while (i<nr_lv_roots)
 {
 	if ( lv_root_nodes[i]==1 )
 	{
       	  lv_root_nodes[i]=rootnodes[i]; // (5.577 9.896 6.501) LV anterior base
 		  std::cout << "LV root " << lv_root_nodes[i] << std::endl;
+		  i++;
+	}
+	else 
+	{
+		//no root node here
+	    std::vector<int>::iterator it;
+		it=rootnodes.begin();
+		it = rootnodes.insert ( it+i , 0 ); //should append 0 in index 2
+		i++;
+		
 	}
 }
 
-	for (int i =0; i<3;i++)
+	for (int i =0; i<nr_rv_roots;i++)
 {
 	if ( rv_root_nodes[i]==1 )
 	{
-      	  rv_root_nodes[i]=rootnodes[i+nr_lv_roots+1]; // (5.577 9.896 6.501) LV anterior base
+      	  rv_root_nodes[i]=rootnodes[i+nr_lv_roots]; // (5.577 9.896 6.501) LV anterior base
 		  std::cout << "RV root " << rv_root_nodes[i] << std::endl;
 	}
 
