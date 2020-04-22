@@ -212,21 +212,22 @@ public:
        // LV and RV activation root nodes
 	   int i=0;
 
-	  
+	
 	while (i<nr_lv_roots)
 {
 	if ( lv_root_nodes[i]==1 )
 	{
       	  lv_root_nodes[i]=rootnodes[i]; // (5.577 9.896 6.501) LV anterior base
-		  std::cout << "LV root " << lv_root_nodes[i] << std::endl;
+	  std::cout << "LV root " << lv_root_nodes[i] << std::endl;
+
 		  i++;
 	}
 	else 
 	{
 		//no root node here
-	    std::vector<int>::iterator it;
-		it=rootnodes.begin();
-		it = rootnodes.insert ( it+i , 0 ); //should append 0 in index 2
+		lv_root_nodes[i]=rootnodes[2];
+		std::cout << "LV root " << lv_root_nodes[i] << std::endl;
+
 		i++;
 		
 	}
